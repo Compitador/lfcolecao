@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LF Colecionáveis - Vitrine de Miniaturas</title>
+    <!-- Adicionando a tag do Favicon (basta colocar um arquivo favicon.ico ou favicon.png na mesma pasta) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -29,18 +32,18 @@
         .grid-tight {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 2px;
+            gap: 1px;
         }
         @media (min-width: 640px) {
             .grid-tight {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 3px;
+                gap: 2px;
             }
         }
         @media (min-width: 1024px) {
             .grid-tight {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 4px;
+                gap: 2px;
             }
         }
     </style>
@@ -66,12 +69,13 @@
         </div>
     </header>
 
-    <section class="relative bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-800/60 overflow-hidden">
+    <section class="relative bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 py-8 px-4 sm:px-6 lg:px-8 border-b border-slate-800/60 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ef4444_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10">
             
+            <!-- Área da logo central (carrega a partir de imagens/carro-000.jpg) -->
             <div class="mb-6 flex flex-col items-center justify-center">
-                <div class="w-full max-w-md h-48 sm:h-56 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-center p-4 shadow-2xl overflow-hidden relative group">
+                <div class="w-full max-w-sm h-40 sm:h-48 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-center p-2 shadow-2xl overflow-hidden relative group">
                     <img id="main-logo" src="imagens/carro-000.jpg" alt="LF Colecionáveis Logo" onerror="this.src='https://placehold.co/500x250/1e293b/ef4444?text=imagens/carro-000.jpg'" class="w-full h-full object-contain">
                 </div>
             </div>
@@ -84,14 +88,6 @@
     </section>
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-1 sm:px-4 py-6">
-        <div class="flex items-center justify-between mb-4 px-2">
-            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-400 flex items-center space-x-2">
-                <i class="fa-solid fa-grid-2 text-red-500"></i>
-                <span>Vitrine de Miniaturas</span>
-            </h2>
-            <div class="text-xs text-slate-500">Total: <span id="visible-count">100</span> itens</div>
-        </div>
-
         <div id="car-grid" class="grid-tight"></div>
         
         <div id="no-results" class="hidden text-center py-16">
@@ -135,10 +131,8 @@
         function renderCars(data) {
             const grid = document.getElementById('car-grid');
             const noResults = document.getElementById('no-results');
-            const visibleCount = document.getElementById('visible-count');
             
             grid.innerHTML = '';
-            visibleCount.textContent = data.length;
 
             if (data.length === 0) {
                 noResults.classList.remove('hidden');
@@ -154,7 +148,7 @@
                 
                 card.innerHTML = `
                     <div class="aspect-[4/3] w-full bg-slate-950 overflow-hidden relative flex items-center justify-center">
-                        <img src="${car.img}" alt="Carrinho ${car.padded}" loading="lazy" onerror="this.src='https://placehold.co/400x300/1e293b/ef4444?text=${car.filename}'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <img src="${car.img}" alt="Carrinho ${car.padded}" loading="lazy" onerror="this.src='https://placehold.co/400x300/1e293b/ef4444?text=${car.padded}'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                         <span class="absolute top-0.5 left-0.5 bg-black/70 backdrop-blur-md text-[9px] font-mono text-red-400 px-1.5 py-0.5 rounded border border-red-500/20">#${car.padded}</span>
                     </div>
                 `;
